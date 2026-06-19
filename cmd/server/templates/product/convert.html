@@ -1,0 +1,30 @@
+{{define "content"}}
+<div class="convert-page">
+    <h2>京东返现 - 链接转换</h2>
+    <p class="desc">粘贴京东商品链接，自动转换为推广链接下单返现</p>
+    <form method="POST" action="/convert">
+        <input type="hidden" name="csrf_token" value="{{.CSRF}}">
+        <div class="form-group">
+            <input type="url" name="product_url"
+                   placeholder="粘贴京东商品链接，如 https://item.jd.com/123456.html"
+                   value="{{.ProductURL}}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">转换推广链接</button>
+    </form>
+    {{if .AffiliateURL}}
+    <div class="result-box">
+        <h3>推广链接（已生成）</h3>
+        <div class="affiliate-link">
+            <input type="text" id="affiliate-url" value="{{.AffiliateURL}}" readonly>
+            <button type="button" class="btn btn-copy" onclick="copyAffiliateURL()">一键复制</button>
+        </div>
+        {{if .Estimate}}
+        <p class="estimate">预估可返：<strong>¥{{printf "%.2f" .Estimate}}</strong>
+           <span class="note">（按最低佣金率估算，以实际结算为准）</span></p>
+        {{end}}
+        <p class="note">下单后通常 30-60 天结算，请耐心等待。</p>
+    </div>
+    {{end}}
+</div>
+{{end}}
+{{template "layout" .}}

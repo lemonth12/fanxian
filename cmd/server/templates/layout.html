@@ -1,0 +1,38 @@
+{{define "layout"}}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="brand">京东返现</a>
+            <div class="nav-links">
+                {{if .Username}}
+                    <a href="/orders">我的订单</a>
+                    <span class="nav-user">{{.Username}}</span>
+                    <a href="/logout">退出</a>
+                {{else}}
+                    <a href="/login">登录</a>
+                    <a href="/register">注册</a>
+                {{end}}
+            </div>
+        </div>
+    </nav>
+    {{if .Error}}
+    <div class="flash flash-error">{{.Error}}</div>
+    {{end}}
+    {{if .Success}}
+    <div class="flash flash-success">{{.Success}}</div>
+    {{end}}
+    <main class="container">
+        {{template "content" .}}
+    </main>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
+{{end}}

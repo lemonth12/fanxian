@@ -1,0 +1,24 @@
+server:
+  port: 8080
+  mode: debug
+
+database:
+  path: ./data.db
+  wal: true
+
+jwt:
+  access_expire: 2h
+  refresh_expire: 168h
+  secret: '${JWT_SECRET}'
+
+jd_union:
+  app_key: '${JD_APP_KEY}'
+  app_secret: '${JD_APP_SECRET}'
+  site_id: '${JD_SITE_ID}'
+  pid: '${JD_PID}'
+
+cashback:
+  default_rate: 0.7
+
+rate_limit:
+  convert_per_minute: 10

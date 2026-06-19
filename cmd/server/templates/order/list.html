@@ -1,0 +1,35 @@
+{{define "content"}}
+<div class="orders-page">
+    <h2>我的订单</h2>
+    <div class="total-earned">
+        累计已返现：<strong>¥{{printf "%.2f" .TotalEarned}}</strong>
+    </div>
+    <table class="orders-table">
+        <thead>
+            <tr>
+                <th>商品名称</th>
+                <th>下单时间</th>
+                <th>订单状态</th>
+                <th>佣金</th>
+                <th>返现金额</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range .Orders}}
+            <tr>
+                <td>{{if .ProductName}}{{.ProductName}}{{else}}-{{end}}</td>
+                <td>{{.OrderTime.Format "2006-01-02 15:04"}}</td>
+                <td><span class="status status-{{.Status}}">{{statusText .Status}}</span></td>
+                <td>¥{{printf "%.2f" .CommissionAmount}}</td>
+                <td>¥{{printf "%.2f" .CashbackAmount}}</td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="5" class="empty">暂无订单</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+</div>
+{{end}}
+{{template "layout" .}}
